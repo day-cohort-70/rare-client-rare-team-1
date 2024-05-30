@@ -6,7 +6,7 @@ export const loginUser = (user) => {
       "Accept": "application/json"
     },
     body: JSON.stringify({
-      username: user.username,
+      email: user.email,
       password: user.password
     })
   }).then(res => res.json())

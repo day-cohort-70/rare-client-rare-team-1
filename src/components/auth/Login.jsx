@@ -3,17 +3,19 @@ import { Link, useNavigate } from "react-router-dom"
 import { loginUser } from "../../managers/AuthManager"
 
 export const Login = ({ setToken }) => {
-  const username = useRef()
+
   const password = useRef()
+  const email = useRef()
   const navigate = useNavigate()
   const [isUnsuccessful, setisUnsuccessful] = useState(false)
+
 
   const handleLogin = (e) => {
     e.preventDefault()
 
     const user = {
-      username: username.current.value,
-      password: password.current.value
+      password: password.current.value,
+      email: email.current.value
     }
 
     loginUser(user).then(res => {
@@ -34,9 +36,9 @@ export const Login = ({ setToken }) => {
         <p className="subtitle">Please sign in</p>
 
         <div className="field">
-          <label className="label">Username</label>
+          <label className="label">Email</label>
           <div className="control">
-            <input className="input" type="text" ref={username} />
+            <input className="input" type="email" ref={email} />
           </div>
         </div>
 
@@ -56,7 +58,7 @@ export const Login = ({ setToken }) => {
           </div>
         </div>
         {
-          isUnsuccessful ? <p className="help is-danger">Username or password not valid</p> : ''
+          isUnsuccessful ? <p className="help is-danger">Email or password not valid</p> : ''
         }
       </form>
     </section>

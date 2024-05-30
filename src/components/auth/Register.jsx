@@ -5,6 +5,7 @@ import { registerUser } from "../../managers/AuthManager"
 
 
 
+
 export const Register = ({setToken}) => {
 
   const firstName = useRef()

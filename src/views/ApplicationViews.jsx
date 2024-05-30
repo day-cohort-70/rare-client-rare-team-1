@@ -20,10 +20,12 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/categorymanager"  />
         <Route path="/tagmanager"  />
         <Route path="/usermanager"  />
+
       </Route>
     </Routes>
   </>
 }
+
 /* 
 Elements for the routes
 element={<Home />}

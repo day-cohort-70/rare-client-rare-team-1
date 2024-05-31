@@ -11,7 +11,7 @@ export const AddCategoryForm = () => {
     const fetchCategories = location.state?.fetchCategories
 
     const handleSave = () => {
-        if (newCategoryName != "") {
+        if (newCategoryName !== "") {
             addNewCategory(newCategoryName).then(() => {
                 if (fetchCategories) {
                     fetchCategories()
@@ -25,19 +25,32 @@ export const AddCategoryForm = () => {
     }
 
     return (
-        <div className="addCategoryFormContainer">
-            <form>
-            <input 
-                type="text"
-                name="newCategory"
-                required
-                value={newCategoryName}
-                onChange={(event) => {
-                    setNewCategoryName(event.target.value)
-                }}
-            />
+        <div className="container mt-5">
+            <form onSubmit={(e) => e.preventDefault()}>
+                <h2 className="title has-text-centered">Add New Category</h2>
+                <div className="field">
+                    <label className="label">Category Name</label>
+                </div>
+                <div className="control">
+                    <input 
+                        className="input"
+                        type="text"
+                        name="newCategory"
+                        required
+                        value={newCategoryName}
+                        onChange={(event) => {
+                            setNewCategoryName(event.target.value)
+                        }}
+                    />
+                </div>
             </form>
-            <button className="save-btn" onClick={handleSave}>Save</button>
+            <div className="field is-grouped is-grouped-centered">
+                <div className="control">
+                    <button className="button is-primary mt-5" onClick={handleSave}>
+                        Save
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }

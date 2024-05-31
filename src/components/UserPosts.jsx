@@ -15,7 +15,6 @@ export const UserPosts = ({ token }) => {
       }
   
     useEffect(() => {
-      
       getAndSetAdminPosts()
     }, [token])
 

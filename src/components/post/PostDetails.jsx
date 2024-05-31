@@ -12,7 +12,7 @@ export const PostDetails = () => {
     const {postId} = useParams()
 
     const getAndSetPostsById = () => {
-        getPostByPostId().then(postData => {
+        getPostByPostId(postId).then(postData => {
             setPost(postData)
         })
     }
@@ -30,7 +30,7 @@ export const PostDetails = () => {
                     <img className="image" src={post.image_url} />
                 </div>
                 <div className="container-post-info">
-                    {/* <div className="username">By {post.user['username']}</div> */}
+                    <div className="username">By {post.user?.username}</div>
                     <button className="button">View Comments</button>
                     <button onClick={() => navigate(`/posts/${post.id}/comment`)} className="button">Add Comment</button>
                 </div>

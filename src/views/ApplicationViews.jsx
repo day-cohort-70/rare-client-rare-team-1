@@ -3,6 +3,9 @@ import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
 import { Authorized } from "./Authorized"
 import { PostDetails } from "../components/post/PostDetails.jsx"
+import { CategoryList } from "../components/category/CategoryList.jsx"
+import { AddCategoryForm } from "../components/category/AddCategoryForm.jsx"
+
 
 export const ApplicationViews = ({ token, setToken }) => {
   return <>
@@ -18,7 +21,10 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path=":postId/edit" />
         </Route>
         <Route path="/addpost"  />
-        <Route path="/categorymanager"  />
+        <Route path="/categorymanager">
+          <Route index element={<CategoryList />} />
+          <Route path="addCategory" element={<AddCategoryForm />} />
+        </Route>
         <Route path="/tagmanager"  />
         <Route path="/usermanager"  />
 

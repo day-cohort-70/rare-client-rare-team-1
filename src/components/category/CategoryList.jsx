@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getAllCategories } from "../../managers/getAllCategories.jsx"
 import { useNavigate } from "react-router-dom"
+import 'bulma/css/bulma.css'
 
 
 export const CategoryList = () => {
@@ -21,14 +22,23 @@ export const CategoryList = () => {
     }
 
     return (
-        <div className="categoryListContainer">
-            <h2>List of Categories:</h2>
-            <article className="categories">
-                {listOfCategoriesArray.map((categoryObj) => {
-                    return <div key={categoryObj.id}>{categoryObj.label}</div>
+        <div className="container">
+            <h2 className="title">List of Categories:</h2>
+            <article className="box">
+                {listOfCategoriesArray.map((categoryObj, index) => {
+                    const colorClasses = [
+                        'is-primary', 'is-link', 'is-info',
+                        'is-success', 'is-warning', 'is-danger'
+                    ];
+                    const colorClass = colorClasses[index % colorClasses.length];
+                    return (
+                        <div key={categoryObj.id} className={`notification ${colorClass} category-item`}>
+                            {categoryObj.label}
+                        </div>
+                    );
                 })}
             </article>
-            <button onClick={handleClick}>Create Category</button>
+            <button className="button is-primary" onClick={handleClick}>Create Category</button>
         </div>
     )
 }

@@ -26,7 +26,7 @@ export const UserPosts = ({ token }) => {
               <p>you currently have zero posts</p>
             ) : (
               adminPosts.map((postObj) => (
-                <Link to={`posts/${postObj.id}`} className="container-post" key={postObj.id} postId={postObj.id}>
+                <Link to={`/posts/${postObj.id}`} className="container-post" key={postObj.id} postId={postObj.id}>
                   <Post post={postObj} token={token} />
                 </Link>
               ))

@@ -5,6 +5,7 @@ import { Authorized } from "./Authorized"
 import { PostDetails } from "../components/post/PostDetails.jsx"
 import { CategoryList } from "../components/category/CategoryList.jsx"
 import { AddCategoryForm } from "../components/category/AddCategoryForm.jsx"
+import { CommentForm } from "../components/post/CommentForm.jsx"
 
 
 export const ApplicationViews = ({ token, setToken }) => {
@@ -19,6 +20,7 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="posts">
           <Route path=":postId" element={<PostDetails token={token}/>} />
           <Route path=":postId/edit" />
+          <Route path=":postId/comment" element={<CommentForm token={token}/>} />
         </Route>
         <Route path="/addpost"  />
         <Route path="/categorymanager">

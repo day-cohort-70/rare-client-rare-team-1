@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react"
 import { settings } from "../utils/Settings.jsx"
 import { getPostByPostId } from "../../managers/PostManager.jsx"
+import { useNavigate, useParams } from "react-router-dom"
 import "./postDetails.css"
-import { useParams } from "react-router-dom"
 
 
 
 export const PostDetails = () => {
     const [post, setPost] = useState([])
-    const {routeId} = useParams()
+    const navigate = useNavigate()
+    const {postId} = useParams()
 
     const getAndSetPostsById = () => {
-        getPostByPostId(routeId).then(postData => {
+        getPostByPostId().then(postData => {
             setPost(postData)
         })
     }
@@ -28,7 +29,11 @@ export const PostDetails = () => {
                 <div className="container-image">
                     <img className="image" src={post.image_url} />
                 </div>
-                <div className="username">By {post.user['username']}</div>
+                <div className="container-post-info">
+                    {/* <div className="username">By {post.user['username']}</div> */}
+                    <button className="button">View Comments</button>
+                    <button onClick={() => navigate(`/posts/${post.id}/comment`)} className="button">Add Comment</button>
+                </div>
                 <div className="content">{post.content}</div>
                 <div className="publication">{post.publication_date}</div>
             </div>

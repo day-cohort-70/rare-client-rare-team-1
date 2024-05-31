@@ -29,16 +29,16 @@ export const CategoryList = () => {
                     const colorClasses = [
                         'is-primary', 'is-link', 'is-info',
                         'is-success', 'is-warning', 'is-danger'
-                    ];
+                    ]
                     const colorClass = colorClasses[index % colorClasses.length];
                     return (
                         <div key={categoryObj.id} className={`notification ${colorClass} category-item`}>
                             {categoryObj.label}
                         </div>
-                    );
+                    )
                 })}
             </article>
-            <button className="button is-primary" onClick={handleClick}>Create Category</button>
+            <button className="button is-primary mb-6" onClick={handleClick}>Create Category</button>
         </div>
     )
 }

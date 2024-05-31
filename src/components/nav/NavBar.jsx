@@ -66,8 +66,6 @@ export const NavBar = ({ token, setToken }) => {
               ""
           }
 
-
-
         </div>
 
         <div className="navbar-end">

@@ -51,6 +51,8 @@ export const CategoryList = () => {
                     const colorClass = colorClasses[index % colorClasses.length];
                     return (
                         <div key={categoryObj.id} className={`notification ${colorClass} category-item`}>
+                            <button className="button white m-1">EDIT</button>
+                            <button className="button white m-1">DELETE</button>
                             {categoryObj.label}
                         </div>
                     )

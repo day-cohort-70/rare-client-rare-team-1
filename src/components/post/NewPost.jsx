@@ -26,6 +26,7 @@ export const NewPost = ({token}) => {
             setCategories(catArr)
         })
         },[])
+    
         useEffect(()=>{
             getAllTags().then((tagArr)=>{
                 setTags(tagArr)
@@ -34,26 +35,29 @@ export const NewPost = ({token}) => {
 
 
         const handleSubmit = async (e) => {
-            //add window alert
             e.preventDefault()
-            console.log("order submitted")
+            if (post.category_id ===0 || post.title === "" || post.image_url === "" || post.content === ""){
+                window.alert("Please complete all fields of the New Post Form before submitting")
+            } else {
             try {
                 const response  = await CreatePost(post)
                 
-                const addTagPromises = newPostTags.forEach(async (tag) =>{
+                if(newPostTags){
+                newPostTags.forEach(async (tag) =>{
                     const tagObj ={
                         "post_id": parseInt(response),
                         "tag_id" : tag,
                     };
                     
-                    return addNewPostTag(tagObj)
+                addNewPostTag(tagObj)
                 })
-                await Promise.all(addTagPromises)
-                navigate(`/posts/${response.id}`)
+                navigate(`/posts/${response}`)}
             } catch (error){
                 console.error("Error creating post:", error)
             }
+        } 
         }
+
 
     return (
         <form className="newPost">
@@ -78,7 +82,6 @@ export const NewPost = ({token}) => {
                     className="form-control"
                     placeholder="Image URL"
                     onChange={(event) =>{
-                        console.log("triggered")
                         const copy = {...post}
                         copy.image_url = event.target.value
                         setPost(copy)

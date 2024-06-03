@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { getAllTags, addNewTag } from "../../managers/getTags.jsx"
+import { getAllTags, addNewTag } from "../../managers/TagManager.jsx"
 
 
 export const TagList = () => {

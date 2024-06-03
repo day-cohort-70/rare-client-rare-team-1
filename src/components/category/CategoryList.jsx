@@ -6,6 +6,7 @@ import 'bulma/css/bulma.css'
 
 export const CategoryList = () => {
     const [listOfCategoriesArray, setListOfCategoriesArray] = useState([])
+    const [alphabeticalArray, setAlphabeticalArray] = useState([])
     const navigate = useNavigate()
 
     const fetchCategories = () => {
@@ -13,9 +14,26 @@ export const CategoryList = () => {
             setListOfCategoriesArray(data)
     })}
 
+    const alphabeticalOrder = () => {
+        const alphabeticalList = [...listOfCategoriesArray].sort((a, b) => {
+            if (a.label.toLowerCase() < b.label.toLowerCase()) {
+                return -1
+            }
+            if (a.label.toLowerCase() > b.label.toLowerCase()) {
+                return 1
+            }
+            return 0
+        })
+        setAlphabeticalArray(alphabeticalList)
+    }
+
     useEffect(() => {
         fetchCategories()
     }, [])
+
+    useEffect(() => {
+        alphabeticalOrder()
+    }, [listOfCategoriesArray])
 
     const handleClick = () => {
         navigate("/categorymanager/addCategory", { state: { fetchCategories } } )
@@ -25,7 +43,7 @@ export const CategoryList = () => {
         <div className="container">
             <h2 className="title">List of Categories:</h2>
             <article className="box">
-                {listOfCategoriesArray.map((categoryObj, index) => {
+                {alphabeticalArray.map((categoryObj, index) => {
                     const colorClasses = [
                         'is-primary', 'is-link', 'is-info',
                         'is-success', 'is-warning', 'is-danger'

@@ -1,9 +1,13 @@
-import { useRef } from "react"
+import React, { useRef } from "react"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { registerUser } from "../../managers/AuthManager"
 
+
+
+
 export const Register = ({setToken}) => {
+
   const firstName = useRef()
   const lastName = useRef()
   const email = useRef()
@@ -12,12 +16,20 @@ export const Register = ({setToken}) => {
   const password = useRef()
   const verifyPassword = useRef()
   const passwordDialog = useRef()
+
   const navigate = useNavigate()
+
+
+
 
   const handleRegister = (e) => {
     e.preventDefault()
-    
+
+
+    /* check to see if password and verify password fields match */
     if (password.current.value === verifyPassword.current.value) {
+
+      /* if the passwords match, it creates a newUser object with values from form inputs*/
       const newUser = {
         username: username.current.value,
         first_name: firstName.current.value,
@@ -27,15 +39,16 @@ export const Register = ({setToken}) => {
         bio: bio.current.value
       }
 
+      /* invokes registerUser() with newUser as an argument */
       registerUser(newUser)
-        .then(res => {
-          if ("valid" in res && res.valid) {
-            setToken(res.token)
+      .then(res => {
+        if ("valid" in res && res.valid) {
+            setToken(res.token) /* sets token and navigates to home */
             navigate("/")
           }
         })
     } else {
-      passwordDialog.current.showModal()
+      passwordDialog.current.showModal() /* if passwords do not match this runs */
     }
   }
 
@@ -104,6 +117,11 @@ export const Register = ({setToken}) => {
             <Link to="/login" className="button is-link is-light">Cancel</Link>
           </div>
         </div>
+
+        <dialog ref={passwordDialog}>
+          <p>Passwords do not match. Please try again.</p>
+          <button className="button" onClick={() => passwordDialog.current.close()}>Close</button>
+        </dialog>
 
       </form>
     </section>

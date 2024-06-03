@@ -1,0 +1,53 @@
+.container-post-details {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .post-details {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+
+        .title {
+            text-align: center;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .container-image {
+            display: flex;
+            justify-content: center;
+
+            .image {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+        }
+        
+        .container-post-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+
+            .username {
+                
+            }
+            .button {
+
+            }
+        }
+
+        .content {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .publication {
+
+        }
+        
+
+    }
+}

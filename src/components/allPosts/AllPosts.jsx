@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import { getAllPosts } from "../../managers/MyPostsManager.jsx"
+import { useNavigate } from "react-router-dom"
 
 
 export const AllPosts = () => {
     const [allPostsArray, setAllPostsArray] = useState([])
     const [sortedPostsByApproval, setSortedPostsByApproval] = useState([])
     const [sortedPostsByApprovalAndDate, setSortedPostsByApprovalAndDate] = useState([])
+    const navigate = useNavigate()
 
 
     const grabbingAllPosts = () => {
@@ -37,6 +39,11 @@ export const AllPosts = () => {
         setSortedPostsByApprovalAndDate(dateListArray)
     }
 
+    /* Handles Navigation to details of the post */
+    const handleClick = (postId) => {
+        navigate(`/posts/${postId}`)
+    }
+
     /* First, grab all the posts from the database */
     useEffect(() => {
         grabbingAllPosts()
@@ -60,7 +67,7 @@ export const AllPosts = () => {
                         <div>Title: {object.title}</div>
                         <div>Author: {object.user.username}</div>
                         <div>Category: {object.category.label}</div>
-                        <div><button>Edit</button><button>Delete</button></div>
+                        <div><button>Edit</button><button>Delete</button><button onClick={() => {handleClick(object.id)}}>Details</button></div>
                     </div>
                 })}
             </div>

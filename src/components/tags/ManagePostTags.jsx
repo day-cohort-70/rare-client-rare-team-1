@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { getAllTags } from "../../managers/getTags.jsx"
+import { getAllTags } from "../../managers/TagManager.jsx"
 import { getTagsByPostId, updatePostTags } from "../../managers/PostTagManager.jsx"
 import { useNavigate, useParams } from "react-router-dom"
 

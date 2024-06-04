@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { getPostByPostId } from "../../managers/PostManager.jsx"
 import { useNavigate, useParams, Link } from "react-router-dom"
-import { getAllTags} from "../../managers/getTags.jsx"
+import { getAllTags } from "../../managers/TagManager.jsx"
 import { getTagsByPostId } from "../../managers/PostTagManager.jsx"
 import "./postDetails.css"
 

@@ -11,6 +11,7 @@ import { NewPost } from "../components/post/NewPost.jsx"
 import { CommentForm } from "../components/post/CommentForm.jsx"
 import { ManagePostTags } from "../components/tags/ManagePostTags.jsx"
 import { AllPosts } from "../components/allPosts/AllPosts.jsx"
+import { EditCategory } from "../components/category/EditCategoryForm.jsx"
 
 
 export const ApplicationViews = ({ token, setToken }) => {
@@ -35,6 +36,7 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/categorymanager">
           <Route index element={<CategoryList />} />
           <Route path="addCategory" element={<AddCategoryForm />} />
+          <Route path=":categoryId/edit" element={<EditCategory />} />
         </Route>
         <Route path="/tagmanager" element={<TagList />} />
         <Route path="/usermanager"  />

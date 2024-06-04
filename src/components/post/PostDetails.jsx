@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { settings } from "../utils/Settings.jsx"
-import { getPostByPostId } from "../../managers/PostManager.jsx"
+import { deletePost, getPostByPostId } from "../../managers/PostManager.jsx"
 import { useNavigate, useParams } from "react-router-dom"
 import "./postDetails.css"
 
@@ -16,6 +16,18 @@ export const PostDetails = () => {
             setPost(postData)
         })
     }
+    const deletePostFromDatabase = async () => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this post?")
+        if (confirmDelete) {
+            try {
+                await deletePost(post.id)
+                    navigate(`/posts`)
+
+            } catch (error) {
+                console.error("Failed to delete post", error)
+            }    
+        }
+    }
 
     useEffect(() => {
         getAndSetPostsById() 
@@ -26,6 +38,7 @@ export const PostDetails = () => {
         <div className="container-post-details">
             <div className="post-details">
                 <h3 className="title">{post.title}</h3>
+                <button className="button-delete" onClick={deletePostFromDatabase}>Delete Post</button>
                 <div className="container-image">
                     <img className="image" src={post.image_url} />
                 </div>

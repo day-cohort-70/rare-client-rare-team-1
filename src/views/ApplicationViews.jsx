@@ -20,7 +20,6 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/"  />
 
         <Route path="allposts"/>
-        <Route path="myposts"/>
         
         <Route path="posts" >
           <Route index element={<UserPosts token={token} />} />

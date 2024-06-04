@@ -20,3 +20,19 @@ export const CreatePost = async (data) => {
     return Promise.reject(new Error("Network response was not ok"))
 }
 }
+
+export const deletePost = async (id) => {
+    const deleteOptions = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    }
+    return await fetch(`http://localhost:8088/posts/${id}`, deleteOptions).then((res) => {
+        if (res.status === 204) {
+            return true;
+        } else {
+            throw new Error("Failed to delete post");
+        }   
+    })
+}

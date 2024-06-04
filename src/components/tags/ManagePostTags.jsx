@@ -11,22 +11,6 @@ export const ManagePostTags = () => {
     const {postId} = useParams()
     const navigate = useNavigate()
 
-
-    // const getAndSetTags = () => {
-    //     getAllTags().then(tagData => {
-    //         setAvailableTags(tagData)
-    //     })
-    // }
-    // const getTagsForPost = () => {
-    //     getTagsByPostId(postId).then(tagData => {
-    //         setPostTags(tagData)
-    //     })
-    // }
-    // useEffect(() => {
-    //     getAndSetTags()
-    //     getTagsForPost()
-    // }, [])
-
     useEffect(() => {
         const fetchData = async () => {
             const tagData = await getAllTags();
@@ -60,7 +44,7 @@ export const ManagePostTags = () => {
 
 
     return (
-    <form className="container-manage-tags">
+    <form className="container-manage-tags" onSubmit={handleSubmit}>
         <h2>Manage Post Tags</h2>
         <div className="form-container">
             <div className="form">

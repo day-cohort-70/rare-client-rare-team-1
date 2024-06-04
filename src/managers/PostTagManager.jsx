@@ -18,5 +18,11 @@ export const getTagsByPostId = (postId) => {
 }
 
 export const updatePostTags = async (postId, updatedTags) => {
-    return fetch(``)
+    return fetch(`http://localhost:8088/posttag/${postId}`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({updatedTags})
+    })
 }

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import { getAllCategories } from "../../managers/getAllCategories.jsx"
-import { getAllTags } from "../../managers/getTags.jsx"
-
+import { getAllTags } from "../../managers/TagManager.jsx"
+import { CreatePost } from "../../managers/PostManager.jsx"
+import { useNavigate } from "react-router-dom"
+import { addNewPostTag } from "../../managers/PostTagManager.jsx"
 
 export const NewPost = ({token}) => {
     const [post, setPost] = useState(
@@ -17,34 +19,45 @@ export const NewPost = ({token}) => {
     const [categories, setCategories] = useState([])
     const [tags, setTags] = useState([])
     const [newPostTags, setNewPostTags] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() =>{
         getAllCategories().then((catArr)=> {
             setCategories(catArr)
         })
         },[])
+    
         useEffect(()=>{
             getAllTags().then((tagArr)=>{
                 setTags(tagArr)
             })
         },[])
 
-        // const handleSubmit = async (e) => {
-        //     //add window alert
-        //     e.preventDefault()
-        //     console.log("order submitted")
-        //     await createPost(post).then(response => {
-        //         {newPostTags.map(tag => {
-        //         const tagObj = {
-        //             "post_id": response.id,
-        //             "tag_id": tag.id,
-        //         }
-        //      addNewPostTag(tagObj)
-        //     })}
-        //     }).then(navigate(`/posts/:response.id`))
-            
-        // }
-    
+
+        const handleSubmit = async (e) => {
+            e.preventDefault()
+            if (post.category_id ===0 || post.title === "" || post.image_url === "" || post.content === ""){
+                window.alert("Please complete all fields of the New Post Form before submitting")
+            } else {
+            try {
+                const response  = await CreatePost(post)
+                
+                if(newPostTags){
+                newPostTags.forEach(async (tag) =>{
+                    const tagObj ={
+                        "post_id": parseInt(response),
+                        "tag_id" : tag,
+                    };
+                    
+                addNewPostTag(tagObj)
+                })
+                navigate(`/posts/${response}`)}
+            } catch (error){
+                console.error("Error creating post:", error)
+            }
+        } 
+        }
+
 
     return (
         <form className="newPost">
@@ -116,13 +129,19 @@ export const NewPost = ({token}) => {
                     type="checkbox"
                     value={tag.id}
                     id={tag.label}
-                    //need an onchange here
+                    onChange={(event) =>{
+                    const selectedTagId = parseInt(event.target.value)
+                    const copy = newPostTags
+                    copy.push(selectedTagId)
+                    setNewPostTags(copy)
+                    }}
                      />   
                      <label htmlFor={tag.label}>{tag.label}</label>
                      </div>
                     ))}
                     </div>
             </fieldset>
+            <button className="save-btn" onClick={handleSubmit}> Post </button>
         </form>
     )
 }

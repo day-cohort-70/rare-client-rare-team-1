@@ -1,14 +1,10 @@
-export const getAllTags = () => {
-    return fetch (`http://localhost:8088/tag`).then(res => res.json())
-}
-
-export const addNewTag = (newTag) => {
-    return fetch(`http://localhost:8088/tag`,{
+export const addNewPostTag = (postTag) => {
+    return fetch (`http://localhost:8088/postTags`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(newTag)
+        body: JSON.stringify(postTag)
     }).then(res => {
         if (res.status === 204 || res.ok){
             return Promise.resolve()

@@ -9,6 +9,9 @@ import { AddCategoryForm } from "../components/category/AddCategoryForm.jsx"
 import { TagList } from "../components/tags/TagList.jsx"
 import { NewPost } from "../components/post/NewPost.jsx"
 import { CommentForm } from "../components/post/CommentForm.jsx"
+import { ManagePostTags } from "../components/tags/ManagePostTags.jsx"
+import { AllPosts } from "../components/allPosts/AllPosts.jsx"
+import { EditPost } from "../components/post/EditPost.jsx"
 
 
 export const ApplicationViews = ({ token, setToken }) => {
@@ -19,13 +22,14 @@ export const ApplicationViews = ({ token, setToken }) => {
       <Route element={<Authorized token={token} />}>
         <Route path="/"  />
 
-        <Route path="allposts"/>
+        <Route path="/allposts" element={<AllPosts />} />
         
         <Route path="posts" >
-          <Route index element={<UserPosts token={token} />} />
+          <Route index element={<UserPosts token={token} />} />       
           <Route path=":postId" element={<PostDetails token={token}/>} />
-          <Route path=":postId/edit" />
+          <Route path=":postId/edit" element={<EditPost />} />
           <Route path=":postId/comment" element={<CommentForm token={token}/>} />
+          <Route path=":postId/tags" element={<ManagePostTags token={token}/>} />
         </Route>
 
         <Route path="/newPost" element={<NewPost token={token} />}/>

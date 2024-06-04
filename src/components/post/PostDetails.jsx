@@ -1,19 +1,34 @@
 import { useEffect, useState } from "react"
+import { useNavigate, useParams, Link } from "react-router-dom"
+import { getAllTags } from "../../managers/TagManager.jsx"
+import { getTagsByPostId } from "../../managers/PostTagManager.jsx"
 import { settings } from "../utils/Settings.jsx"
 import { deletePost, getPostByPostId } from "../../managers/PostManager.jsx"
-import { useNavigate, useParams } from "react-router-dom"
 import "./postDetails.css"
 
 
 
 export const PostDetails = () => {
     const [post, setPost] = useState([])
+    const [postTags, setPostTags] = useState([])
+    const [availableTags, setAvailableTags] = useState([])
     const navigate = useNavigate()
     const {postId} = useParams()
 
-    const getAndSetPostsById = () => {
+
+    const getAndSetPost = () => {
         getPostByPostId(postId).then(postData => {
             setPost(postData)
+        })
+    }
+    const getAndSetTags = () => {
+        getAllTags().then(tagData => {
+            setAvailableTags(tagData)
+        })
+    }
+    const getTagsForPost = () => {
+        getTagsByPostId(postId).then(tagData => {
+            setPostTags(tagData)
         })
     }
     const deletePostFromDatabase = async () => {
@@ -30,7 +45,9 @@ export const PostDetails = () => {
     }
 
     useEffect(() => {
-        getAndSetPostsById() 
+        getAndSetPost()
+        getAndSetTags()
+        getTagsForPost()
     }, [])
 
 
@@ -39,13 +56,30 @@ export const PostDetails = () => {
             <div className="post-details">
                 <h3 className="title">{post.title}</h3>
                 <button className="button-delete" onClick={deletePostFromDatabase}>Delete Post</button>
-                <div className="container-image">
-                    <img className="image" src={post.image_url} />
+                <div className="container-image-and-tags">
+                    <div className="div-image">
+                        <img className="image" src={post.image_url} />
+                    </div>
+                    <div className="div-post-tags">
+                        <div className="post-tags">
+                            {postTags.map(tag => {
+                                return (
+                                    <div key={tag.id}>{tag.tag?.label}</div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                
+                
                 </div>
+
                 <div className="container-post-info">
                     <div className="username">By {post.user?.username}</div>
                     <button className="button">View Comments</button>
                     <button onClick={() => navigate(`/posts/${post.id}/comment`)} className="button">Add Comment</button>
+                    <Link to={`/posts/${post.id}/tags`} postId={postId}>
+                        <button className="button">Manage Tags</button>
+                    </Link>
                 </div>
                 <div className="content">{post.content}</div>
                 <div className="publication">{post.publication_date}</div>

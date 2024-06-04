@@ -2,9 +2,7 @@ export const getAllTags = () => {
     return fetch (`http://localhost:8088/tag`).then(res => res.json())
 }
 
-export const getTagsByPostId = (postId) => {
-    return fetch (`http://localhost:8088/tag/${postId}?_expand=tag`).then(res => res.json())
-}
+
 
 
 export const addNewTag = (newTag) => {
@@ -21,3 +19,4 @@ export const addNewTag = (newTag) => {
         return Promise.reject(new Error("Network response was not ok"))
     })
 }
+

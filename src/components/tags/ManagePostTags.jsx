@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
-import { getAllTags, getTagsByPostId } from "../../managers/getTags.jsx"
+import { getAllTags } from "../../managers/getTags.jsx"
+import { getTagsByPostId, updatePostTags } from "../../managers/PostTagManager.jsx"
 import { useNavigate, useParams } from "react-router-dom"
 
 
@@ -49,6 +50,14 @@ export const ManagePostTags = () => {
             return updatedSelectedTags
         })
     }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const updatedTags = Array.from(selectedTags)
+        await updatePostTags(postId, updatedTags)
+        navigate(`/posts/${postId}`)
+    }
+
 
     return (
     <form className="container-manage-tags">

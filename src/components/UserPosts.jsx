@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import { getAllPosts } from "../managers/MyPostsManager"
 import { Post } from "./Post"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 
 export const UserPosts = ({ token }) => {
     const [adminPosts, setAdminPosts] = useState([])
+    const navigate = useNavigate()
 
     const getAndSetAdminPosts = () => {
         getAllPosts().then(allPosts => {
@@ -26,9 +27,14 @@ export const UserPosts = ({ token }) => {
               <p>you currently have zero posts</p>
             ) : (
               adminPosts.map((postObj) => (
+                <div>
                 <Link to={`/posts/${postObj.id}`} className="container-post" key={postObj.id} postId={postObj.id}>
                   <Post post={postObj} token={token} />
                 </Link>
+                <button onClick = { () =>{
+                  navigate(`/posts/${postObj.id}/edit`)
+              }} > Edit </button>
+              </div>
               ))
             )}
           </section>

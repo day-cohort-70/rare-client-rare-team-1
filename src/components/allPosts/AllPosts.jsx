@@ -61,6 +61,9 @@ export const AllPosts = () => {
 
     return (
         <div className="container">
+            <button onClick = {()=>{
+                navigate(`/newPost`)
+            }}> New Post </button>
             <div className="allposts-container">
                 {sortedPostsByApprovalAndDate.map((object) => {
                     return <div className="notification category-item" key={object.id}>

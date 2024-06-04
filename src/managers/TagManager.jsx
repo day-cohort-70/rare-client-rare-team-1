@@ -2,6 +2,9 @@ export const getAllTags = () => {
     return fetch (`http://localhost:8088/tag`).then(res => res.json())
 }
 
+
+
+
 export const addNewTag = (newTag) => {
     return fetch(`http://localhost:8088/tag`,{
         method: "POST",

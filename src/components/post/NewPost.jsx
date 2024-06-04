@@ -14,7 +14,7 @@ export const NewPost = ({token}) => {
         publication_date: new Date(),
         image_url: "",
         content: "",
-        approved: 0
+        approved: 1
         })
     const [categories, setCategories] = useState([])
     const [tags, setTags] = useState([])

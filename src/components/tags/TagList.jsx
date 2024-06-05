@@ -9,10 +9,15 @@ export const TagList = () => {
     const [newTagName, setNewTagName] = useState("")
     const navigate = useNavigate()
 
-    useEffect(() =>{
+    /* Need this here so I can call on it to refresh the page properly */
+    const retrieveTags = () => {
         getAllTags().then(tags =>{
             setTagList(tags)
         })
+    }
+
+    useEffect(() =>{
+        retrieveTags()
     }, [])
 
     const handleSave = () => {
@@ -33,7 +38,10 @@ export const TagList = () => {
     const handleDelete = (tagId) => {
         if (window.confirm("Are you sure you want to delete the tag?")) {
             console.log("deleted")
-            deleteTag(tagId)
+            deleteTag(tagId).then(() => {
+                retrieveTags()
+            })
+            
             deletePostTagsById(tagId)
         }
     }

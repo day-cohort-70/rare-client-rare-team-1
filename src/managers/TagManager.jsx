@@ -27,3 +27,13 @@ export const deleteTag = (tagId) => {
     })
 }
 
+export const updateTag = async (edittedTag) => {
+    return await fetch(`http://localhost:8088/tags/${edittedTag.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(edittedTag)
+    })
+}
+

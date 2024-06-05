@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react"
-import { useNavigate } from "react-router-dom"
 import { getAllTags, addNewTag, deleteTag, updateTag } from "../../managers/TagManager.jsx"
 import { deletePostTagsById } from "../../managers/PostTagManager.jsx"
 import 'bulma/css/bulma.css'
@@ -63,6 +62,8 @@ export const TagList = () => {
         handleSave(inputRef.current.value)
       }
     }
+
+    //set modal as viewable or not
     const active = showModal ? ("is-active"): ("")
 
     return(

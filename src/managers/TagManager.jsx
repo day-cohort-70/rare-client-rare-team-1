@@ -20,3 +20,5 @@ export const addNewTag = (newTag) => {
     })
 }
 
+// add update tag function with PUT
+

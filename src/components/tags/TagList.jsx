@@ -22,7 +22,7 @@ export const TagList = () => {
             setTagList(tags)
         })
     }, [])
-
+ 
     const handleSave = () => {
        if (newTagName !== "") {
         addNewTag(newTagName).then(()=>{
@@ -50,7 +50,10 @@ export const TagList = () => {
                     return (
                         <div key={tag.id} className={`notification ${colorClass} category-item`}>
                             {/* add ternary for admin user later */}
-                            <button className="button white m-1">
+                            <button 
+                            // add on click to navigate to :tagId/edit
+                            // update views with editTag module
+                            className="button white m-1">
                             <i className="fa-solid fa-gear"></i>
                             </button>
                              <button className="button white m-1">

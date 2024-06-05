@@ -54,7 +54,7 @@ export const NavBar = ({ token, setToken }) => {
           {
             token
               ?
-              <Link to="/" className="navbar-item">Tag Manager</Link>
+              <Link to="/tagmanager" className="navbar-item">Tag Manager</Link>
               :
               ""
           }

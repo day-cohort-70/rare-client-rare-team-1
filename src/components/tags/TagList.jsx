@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { getAllTags, addNewTag } from "../../managers/TagManager.jsx"
+import { getAllTags, addNewTag, deleteTag } from "../../managers/TagManager.jsx"
+import { deletePostTagsById } from "../../managers/PostTagManager.jsx"
 
 
 export const TagList = () => {
@@ -28,17 +29,29 @@ export const TagList = () => {
        }
     }
 
+    /* Function to handle the deleting of a tag. Also needs to delete each instance in the PostTags joiner table */
+    const handleDelete = (tagId) => {
+        if (window.confirm("Are you sure you want to delete the tag?")) {
+            console.log("deleted")
+            deleteTag(tagId)
+            deletePostTagsById(tagId)
+        }
+    }
+
     return(
         <div className="tagListContainer">
-            <h2> Tags </h2>
+            <h2 className="title has-text-centered"> Tags </h2>
             <article className="tags">
-                <ul className="tagList">
+                <div className="tagList">
                 {tagList.map((tag) => {
                     return (
-                        <li key={tag.id}> {tag.label} </li>
+                        <div key={tag.id}>
+                            <div key={tag.id}> {tag.label} </div>
+                            <button className="button is-warning" onClick={() => {handleDelete(tag.id)}}>Delete</button>
+                        </div>
                     )
                 })}
-                </ul>
+                </div>
             </article>
             <aside className="newTagForm"> 
             <h3>Create a New Tag </h3>

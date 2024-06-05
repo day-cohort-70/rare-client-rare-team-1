@@ -20,3 +20,10 @@ export const addNewTag = (newTag) => {
     })
 }
 
+
+export const deleteTag = (tagId) => {
+    return fetch(`http://localhost:8088/tag/${tagId}`, {
+        method: "DELETE"
+    })
+}
+

@@ -113,7 +113,7 @@ export const TagList = () => {
                   <input
                     className="input"
                     type="text"
-                    placeholder={editedTag.label}
+                    defaultValue={editedTag.label}
                     onChange={(event)=>{
                         const copy = {...editedTag}
                         copy.label = event.target.value
@@ -128,6 +128,7 @@ export const TagList = () => {
                 onClick={async ()=>{
                 await updateTag(editedTag).then(()=> {
                     setShowModal(false)
+                    setEditedTag({})
                     getAndSetAllTags()
               })
               }}

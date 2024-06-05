@@ -2,6 +2,10 @@ export const getAllCategories = () => {
     return fetch(`http://localhost:8088/category`).then(res => res.json())
 }
 
+export const getCategoryById = (categoryId) => {
+    return fetch(`http://localhost:8088/category/${categoryId}`).then(res => res.json())
+}
+
 export const addNewCategory = (name) => {
     return fetch(`http://localhost:8088/category`, {
         method: "POST",
@@ -15,4 +19,14 @@ export const addNewCategory = (name) => {
         }
         return Promise.reject(new Error("Network response was not ok"))
       })
+}
+
+export const updateCategory = (editedCategory) => {
+    return fetch(`http://localhost:8088/category/${editedCategory.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(editedCategory)
+    })
 }

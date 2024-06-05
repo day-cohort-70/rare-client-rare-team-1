@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getAllCategories } from "../../managers/getAllCategories.jsx"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import 'bulma/css/bulma.css'
 
 
@@ -39,6 +39,7 @@ export const CategoryList = () => {
         navigate("/categorymanager/addCategory", { state: { fetchCategories } } )
     }
 
+
     return (
         <div className="container">
             <h2 className="title">List of Categories:</h2>
@@ -51,12 +52,15 @@ export const CategoryList = () => {
                     const colorClass = colorClasses[index % colorClasses.length];
                     return (
                         <div key={categoryObj.id} className={`notification ${colorClass} category-item`}>
+                            <Link to={`/categorymanager/${categoryObj.id}/edit`}>
+                                <button className="button white m-1">
+                                  <i className="fa-solid fa-gear"></i>
+                                </button>
+                            </Link>
                             <button className="button white m-1">
-                            <i className="fa-solid fa-gear"></i>
+                              <i className="fa-solid fa-trash"></i>
                             </button>
-                            <button className="button white m-1">
-                            <i className="fa-solid fa-trash"></i>
-                            </button>
+
                             {categoryObj.label}
                         </div>
                     )

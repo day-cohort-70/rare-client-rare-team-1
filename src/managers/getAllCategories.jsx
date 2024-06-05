@@ -21,12 +21,18 @@ export const addNewCategory = (name) => {
       })
 }
 
-export const updateCategory = (editedCategory) => {
+export const updateCategory = async (editedCategory) => {
     return fetch(`http://localhost:8088/category/${editedCategory.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(editedCategory)
+    })
+}
+
+export const deleteCategory = async (categoryId) => {
+    return fetch(`http://localhost:8088/category/${categoryId}`, {
+        method: "DELETE"
     })
 }

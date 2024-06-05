@@ -21,7 +21,7 @@ export const ApplicationViews = ({ token, setToken }) => {
       <Route path="/login" element={<Login setToken={setToken} />} />
       <Route path="/register" element={<Register setToken={setToken} />} />
       <Route element={<Authorized token={token} />}>
-        <Route path="/"  />
+        <Route path="/" element={<UserPosts token={token} />} />
 
         <Route path="/allposts" element={<AllPosts />} />
         
@@ -48,13 +48,28 @@ export const ApplicationViews = ({ token, setToken }) => {
 }
 
 /* 
+6/5/24: continued naming convention notes:
+
+Posts
+Routes for a "post" story (view, add comment, manage tags) are functional and named appropriately 
+Let's use strict lowercase for all route names: ie tagmanager, with the exception of postId since that is an int
+Still need Route for view comments on a post. Naming: /posts/postId/viewcomments
+Still need an edit option from the post details view. The route and element is established, we just need a button.
+
+posts by author view is navigated to from the user profile view, see below 
+
+Categories: 
+
+/categorymanager with an index element of CategoryList
+/categorymanager/categoryId When a category name is clicked, the user will be taken to a view that shows all posts with that categoryId
+
+users: 
+
+/usermanager with an index element of UserList
+/usermanager/userId When a user name is clicked, the user will be taken to a view that shows that users profile
+
 Elements for the routes
 element={<Home />}
-element={<AllPosts token={token} />}
-element={<PostDetails />}
-element={<MyPosts token={token} />}
-element={<EditPostDetails />}
-element={<AddPost token={token} />}
 element={<CategoryManager token={token} />}
 element={<TagManager token={token} />}
 element={<UserManager token={token} />}

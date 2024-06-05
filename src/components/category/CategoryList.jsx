@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { getAllCategories } from "../../managers/getAllCategories.jsx"
-import { useNavigate } from "react-router-dom"
+import { deleteCategory, getAllCategories } from "../../managers/getAllCategories.jsx"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import 'bulma/css/bulma.css'
 
 
@@ -10,8 +10,9 @@ export const CategoryList = () => {
     const navigate = useNavigate()
 
     const fetchCategories = () => {
-        getAllCategories().then(data => {
-            setListOfCategoriesArray(data)
+        getAllCategories().then(categories => {
+            const filteredCategories = categories.filter(category => category.id !== 0)
+            setListOfCategoriesArray(filteredCategories)
     })}
 
     const alphabeticalOrder = () => {
@@ -39,6 +40,20 @@ export const CategoryList = () => {
         navigate("/categorymanager/addCategory", { state: { fetchCategories } } )
     }
 
+    const handleEdit = (categoryId) => {
+        navigate(`/categorymanager/${categoryId}/edit`)
+    }
+
+    const handleDelete = (categoryId) => {
+        const confirmed = window.confirm('Are you sure you want to delete this category?')
+        if (confirmed) {
+            deleteCategory(categoryId).then(() => {
+                fetchCategories()
+            })
+        }
+    }
+
+
     return (
         <div className="container">
             <h2 className="title">List of Categories:</h2>
@@ -51,8 +66,13 @@ export const CategoryList = () => {
                     const colorClass = colorClasses[index % colorClasses.length];
                     return (
                         <div key={categoryObj.id} className={`notification ${colorClass} category-item`}>
-                            <button className="button white m-1">EDIT</button>
-                            <button className="button white m-1">DELETE</button>
+                            <button className="button white m-1" onClick={() => handleEdit(categoryObj.id)}>
+                                <i className="fa-solid fa-gear"></i>
+                            </button>
+                            <button className="button white m-1" onClick={() => handleDelete(categoryObj.id)}>
+                                <i className="fa-solid fa-trash"></i>
+                            </button>
+
                             {categoryObj.label}
                         </div>
                     )

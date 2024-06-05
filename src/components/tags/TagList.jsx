@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getAllTags, addNewTag, deleteTag } from "../../managers/TagManager.jsx"
 import { deletePostTagsById } from "../../managers/PostTagManager.jsx"
+import 'bulma/css/bulma.css'
 
 
 export const TagList = () => {
@@ -12,6 +13,15 @@ export const TagList = () => {
     /* Need this here so I can call on it to refresh the page properly */
     const retrieveTags = () => {
         getAllTags().then(tags =>{
+            [...tags].sort((a,b) => {
+                if (a.label.toLowerCase() < b.label.toLowerCase()){
+                    return -1
+                }
+                if (a.label.toLowerCase() > b.label.toLowerCase()){
+                    return 1
+                }
+                return 0
+            })
             setTagList(tags)
         })
     }
@@ -47,19 +57,31 @@ export const TagList = () => {
     }
 
     return(
-        <div className="tagListContainer">
-            <h2 className="title has-text-centered"> Tags </h2>
-            <article className="tags">
-                <div className="tagList">
-                {tagList.map((tag) => {
+
+        <div className="container">
+            <h2 className="title"> Tags </h2>
+            <article className="box">
+                {tagList.map((tag, index) => {
+                    const colorClasses = [
+                        'is-primary', 'is-link', 'is-info',
+                        'is-success', 'is-warning', 'is-danger'
+                    ]
+                    const colorClass = colorClasses[index % colorClasses.length];
                     return (
-                        <div key={tag.id}>
-                            <div key={tag.id}> {tag.label} </div>
+                        <div key={tag.id} className={`notification ${colorClass} category-item`}>
+                            {/* add ternary for admin user later */}
+                            <button className="button white m-1">
+                            <i className="fa-solid fa-gear"></i>
+                            </button>
+                             <button className="button white m-1">
+                             <i className="fa-solid fa-trash"></i>
+                             </button>
+                             <div key={tag.id}> {tag.label} </div>
                             <button className="button is-warning" onClick={() => {handleDelete(tag.id)}}>Delete</button>
+                            {tag.label}
                         </div>
                     )
                 })}
-                </div>
             </article>
             <aside className="newTagForm"> 
             <h3>Create a New Tag </h3>

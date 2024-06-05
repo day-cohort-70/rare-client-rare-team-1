@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { getAllTags, addNewTag } from "../../managers/TagManager.jsx"
-import 'bulma/css/bulma.css'
+import { getAllTags, addNewTag, updateTag } from "../../managers/TagManager.jsx"
+import "bulma/css/bulma.css"
 
 export const TagList = () => {
     const [tagList, setTagList] = useState([])
     const [newTagName, setNewTagName] = useState("")
-    const navigate = useNavigate()
+    const [showModal, setShowModal] = useState(false)
+    const [editedTag, setEditedTag] = useState({})
 
     useEffect(() =>{
+        getAndSetAllTags()
+    }, [])
+ 
+    const getAndSetAllTags = () => {
         getAllTags().then(tags =>{
             [...tags].sort((a,b) => {
                 if (a.label.toLowerCase() < b.label.toLowerCase()){
@@ -21,8 +25,8 @@ export const TagList = () => {
             })
             setTagList(tags)
         })
-    }, [])
- 
+    }
+
     const handleSave = () => {
        if (newTagName !== "") {
         addNewTag(newTagName).then(()=>{
@@ -36,6 +40,7 @@ export const TagList = () => {
         window.alert("Please enter a tag name")
        }
     }
+    const active = showModal ? ("is-active"): ("")
 
     return(
         <div className="container">
@@ -50,19 +55,65 @@ export const TagList = () => {
                     return (
                         <div key={tag.id} className={`notification ${colorClass} category-item`}>
                             {/* add ternary for admin user later */}
-                            <button 
-                            // add on click to navigate to :tagId/edit
-                            // update views with editTag module
+                            <button
+                            onClick = {()=>{setShowModal(true)
+                                setEditedTag(tag)
+                            }}
                             className="button white m-1">
                             <i className="fa-solid fa-gear"></i>
                             </button>
-                             <button className="button white m-1">
-                             <i className="fa-solid fa-trash"></i>
-                             </button>
+                            <button className="button white m-1">
+                            <i className="fa-solid fa-trash"></i>
+                            </button>
                             {tag.label}
                         </div>
                     )
                 })}
+        <div className={`modal ${active}`}>
+          <div className="modal-background" />
+          <div className="modal-card">
+            <header className="modal-card-head">
+              <p className="modal-card-title">Edit Tag</p>
+              <button
+                onClick={()=>{setShowModal(false)}}
+                className="delete"
+                aria-label="close"
+              />
+            </header>
+            <section className="modal-card-body">
+              <div className="field">
+                <label className="label">New Tag Label</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder={editedTag.label}
+                    onChange={(event)=>{
+                        const copy = {...editedTag}
+                        copy.label = event.target.value
+                        setEditedTag(copy)
+                    }}
+                  />
+                </div>
+              </div>
+            </section>
+            <footer className="modal-card-foot">
+              <button className="button is-success"
+                onClick={async ()=>{
+                await updateTag(editedTag).then(()=> {
+                    setShowModal(false)
+                    getAndSetAllTags()
+              })
+              }}
+              >Save changes</button>
+              <button 
+                onClick={()=>{setShowModal(false)}}
+                className="button">
+                Cancel
+              </button>
+            </footer>
+          </div>
+        </div> 
             </article>
             <aside className="newTagForm"> 
             <h3>Create a New Tag </h3>

@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { getAllTags, addNewTag } from "../../managers/TagManager.jsx"
+import { getAllTags, addNewTag, deleteTag } from "../../managers/TagManager.jsx"
+import { deletePostTagsById } from "../../managers/PostTagManager.jsx"
 import 'bulma/css/bulma.css'
+
 
 export const TagList = () => {
     const [tagList, setTagList] = useState([])
     const [newTagName, setNewTagName] = useState("")
     const navigate = useNavigate()
 
-    useEffect(() =>{
+    /* Need this here so I can call on it to refresh the page properly   */
+    const retrieveTags = () => {
         getAllTags().then(tags =>{
             [...tags].sort((a,b) => {
                 if (a.label.toLowerCase() < b.label.toLowerCase()){
@@ -21,6 +24,10 @@ export const TagList = () => {
             })
             setTagList(tags)
         })
+    }
+
+    useEffect(() =>{
+        retrieveTags()
     }, [])
 
     const handleSave = () => {
@@ -37,7 +44,20 @@ export const TagList = () => {
        }
     }
 
+    /* Function to handle the deleting of a tag. Also needs to delete each instance in the PostTags joiner table */
+    const handleDelete = (tagId) => {
+        if (window.confirm("Are you sure you want to delete the tag?")) {
+            console.log("deleted")
+            deleteTag(tagId).then(() => {
+                retrieveTags()
+            })
+            
+            deletePostTagsById(tagId)
+        }
+    }
+
     return(
+
         <div className="container">
             <h2 className="title"> Tags </h2>
             <article className="box">
@@ -53,10 +73,10 @@ export const TagList = () => {
                             <button className="button white m-1">
                             <i className="fa-solid fa-gear"></i>
                             </button>
-                             <button className="button white m-1">
+                             <button className="button white m-1" onClick={() => {handleDelete(tag.id)}}>
                              <i className="fa-solid fa-trash"></i>
                              </button>
-                            {tag.label}
+                             <div key={tag.id}> {tag.label} </div>
                         </div>
                     )
                 })}

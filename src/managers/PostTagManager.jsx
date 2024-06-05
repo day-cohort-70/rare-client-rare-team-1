@@ -27,3 +27,9 @@ export const addNewPostTag = (postTag) => {
         return Promise.reject(new Error("Network response was not ok"))
     })
 }
+
+export const deletePostTagsById = (tagId) => {
+    return fetch(`http://localhost:8088/postTags/${tagId}`, {
+        method: "DELETE"
+    })
+}

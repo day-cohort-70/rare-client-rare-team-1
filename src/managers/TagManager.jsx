@@ -20,6 +20,13 @@ export const addNewTag = (newTag) => {
     })
 }
 
+
+export const deleteTag = (tagId) => {
+    return fetch(`http://localhost:8088/tag/${tagId}`, {
+        method: "DELETE"
+    })
+}
+
 export const updateTag = async (edittedTag) => {
     return await fetch(`http://localhost:8088/tags/${edittedTag.id}`, {
         method: "PUT",

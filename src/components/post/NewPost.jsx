@@ -23,7 +23,8 @@ export const NewPost = ({token}) => {
 
     useEffect(() =>{
         getAllCategories().then((catArr)=> {
-            setCategories(catArr)
+            const filteredCategories = catArr.filter(category => category.id !== 0)
+            setCategories(filteredCategories)
         })
         },[])
     

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState , useRef} from "react"
 import { getAllTags, addNewTag, updateTag } from "../../managers/TagManager.jsx"
 import "bulma/css/bulma.css"
 
@@ -7,6 +7,7 @@ export const TagList = () => {
     const [newTagName, setNewTagName] = useState("")
     const [showModal, setShowModal] = useState(false)
     const [editedTag, setEditedTag] = useState({})
+    const inputRef = useRef()
 
     useEffect(() =>{
         getAndSetAllTags()
@@ -40,6 +41,13 @@ export const TagList = () => {
         window.alert("Please enter a tag name")
        }
     }
+
+    //handles form if enter is pressed instead of save button
+    const handleEnter = (event) => {
+      if (event.key === 'Enter'){
+        handleSave(inputRef.current.value)
+      }
+    }
     const active = showModal ? ("is-active"): ("")
 
     return(
@@ -69,6 +77,7 @@ export const TagList = () => {
                         </div>
                     )
                 })}
+
         <div className={`modal ${active}`}>
           <div className="modal-background" />
           <div className="modal-card">
@@ -120,15 +129,16 @@ export const TagList = () => {
             <form>
                 <input
                     type="text"
-                    name="newTag"
                     required
                     value={newTagName}
+                    ref={inputRef}
+                    onKeyDown={(event) => {handleEnter(event)}}
                     onChange={(event) =>{
                         setNewTagName(event.target.value)
                     }}
                 />
             </form>
-            <button className="save-btn" onClick={handleSave}> Save </button>
+            <button onClick={handleSave}> Save </button>
              </aside>
         </div>
     )

@@ -12,6 +12,7 @@ import { CommentForm } from "../components/post/CommentForm.jsx"
 import { ManagePostTags } from "../components/tags/ManagePostTags.jsx"
 import { AllPosts } from "../components/allPosts/AllPosts.jsx"
 import { EditCategory } from "../components/category/EditCategoryForm.jsx"
+import { EditPost } from "../components/post/EditPost.jsx"
 
 
 export const ApplicationViews = ({ token, setToken }) => {
@@ -27,7 +28,7 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="posts" >
           <Route index element={<UserPosts token={token} />} />       
           <Route path=":postId" element={<PostDetails token={token}/>} />
-          <Route path=":postId/edit" />
+          <Route path=":postId/edit" element={<EditPost />} />
           <Route path=":postId/comment" element={<CommentForm token={token}/>} />
           <Route path=":postId/tags" element={<ManagePostTags token={token}/>} />
         </Route>

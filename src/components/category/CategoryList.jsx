@@ -53,9 +53,14 @@ export const CategoryList = () => {
                     return (
                         <div key={categoryObj.id} className={`notification ${colorClass} category-item`}>
                             <Link to={`/categorymanager/${categoryObj.id}/edit`}>
-                                <button className="button white m-1">EDIT</button>
+                                <button className="button white m-1">
+                                  <i className="fa-solid fa-gear"></i>
+                                </button>
                             </Link>
-                            <button className="button white m-1">DELETE</button>
+                            <button className="button white m-1">
+                              <i className="fa-solid fa-trash"></i>
+                            </button>
+
                             {categoryObj.label}
                         </div>
                     )

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import { getPostByPostId } from "../../managers/PostManager.jsx"
 import { useNavigate, useParams, Link } from "react-router-dom"
 import { getAllTags } from "../../managers/TagManager.jsx"
 import { getTagsByPostId } from "../../managers/PostTagManager.jsx"
+import { settings } from "../utils/Settings.jsx"
+import { deletePost, getPostByPostId } from "../../managers/PostManager.jsx"
 import "./postDetails.css"
 
 
@@ -30,6 +31,18 @@ export const PostDetails = () => {
             setPostTags(tagData)
         })
     }
+    const deletePostFromDatabase = async () => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this post?")
+        if (confirmDelete) {
+            try {
+                await deletePost(post.id)
+                    navigate(`/posts`)
+
+            } catch (error) {
+                console.error("Failed to delete post", error)
+            }    
+        }
+    }
 
     useEffect(() => {
         getAndSetPost()
@@ -42,7 +55,7 @@ export const PostDetails = () => {
         <div className="container-post-details">
             <div className="post-details">
                 <h3 className="title">{post.title}</h3>
-
+                <button className="button-delete" onClick={deletePostFromDatabase}>Delete Post</button>
                 <div className="container-image-and-tags">
                     <div className="div-image">
                         <img className="image" src={post.image_url} />
@@ -56,6 +69,8 @@ export const PostDetails = () => {
                             })}
                         </div>
                     </div>
+                
+                
                 </div>
 
                 <div className="container-post-info">

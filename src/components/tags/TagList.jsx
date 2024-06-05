@@ -113,7 +113,7 @@ export const TagList = () => {
                   <input
                     className="input"
                     type="text"
-                    defaultValue={editedTag.label}
+                    value={editedTag.label}
                     onChange={(event)=>{
                         const copy = {...editedTag}
                         copy.label = event.target.value

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getAllTags, addNewTag, deleteTag } from "../../managers/TagManager.jsx"
 import { deletePostTagsById } from "../../managers/PostTagManager.jsx"
+import 'bulma/css/bulma.css'
 
 
 export const TagList = () => {
@@ -12,6 +13,15 @@ export const TagList = () => {
     /* Need this here so I can call on it to refresh the page properly   */
     const retrieveTags = () => {
         getAllTags().then(tags =>{
+            [...tags].sort((a,b) => {
+                if (a.label.toLowerCase() < b.label.toLowerCase()){
+                    return -1
+                }
+                if (a.label.toLowerCase() > b.label.toLowerCase()){
+                    return 1
+                }
+                return 0
+            })
             setTagList(tags)
         })
     }
@@ -64,9 +74,9 @@ export const TagList = () => {
                             <i className="fa-solid fa-gear"></i>
                             </button>
                              <button className="button white m-1" onClick={() => {handleDelete(tag.id)}}>
-                             <i className="fa-solid fa-trash" ></i>
+                             <i className="fa-solid fa-trash"></i>
                              </button>
-                            {tag.label}
+                             <div key={tag.id}> {tag.label} </div>
                         </div>
                     )
                 })}

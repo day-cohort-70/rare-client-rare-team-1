@@ -21,7 +21,7 @@ export const UserPosts = ({ token }) => {
 
     return (
         <section className="container-admin-posts-page">
-          <div className="title">Posts</div>
+          <h2 className="title m-4">My Posts</h2>
           <section className="container-admin-posts">
             {adminPosts.length === 0 ? (
               <p>you currently have zero posts</p>
@@ -31,7 +31,7 @@ export const UserPosts = ({ token }) => {
                 <Link to={`/posts/${postObj.id}`} className="container-post" key={postObj.id} postId={postObj.id}>
                   <Post post={postObj} token={token} />
                 </Link>
-                <button onClick = { () =>{
+                <button className="button is-primary mb-4 ml-4" onClick = { () =>{
                   navigate(`/posts/${postObj.id}/edit`)
               }} > Edit </button>
               </div>

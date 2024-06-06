@@ -80,17 +80,22 @@ export const TagList = () => {
                     return (
                         <div key={tag.id} className={`notification ${colorClass} category-item`}>
                             {/* add ternary for admin user later */}
-                            <button
-                            onClick = {()=>{setShowModal(true)
-                                setEditedTag(tag)
-                            }}
-                            className="button white m-1">
-                            <i className="fa-solid fa-gear"></i>
-                            </button>
-                             <button className="button white m-1" onClick={() => {handleDelete(tag.id)}}>
-                             <i className="fa-solid fa-trash"></i>
-                             </button>
-                             <div key={tag.id}> {tag.label} </div>
+                            <div className="is-flex is-align-items-center">
+                              <button
+                                onClick = {()=>{setShowModal(true)
+                                    setEditedTag(tag)
+                                }}
+                                className="button white m-1">
+                                <i className="fa-solid fa-gear"></i>
+                              </button>
+                              <button className="button white m-1" onClick={() => {handleDelete(tag.id)}}>
+                                <i className="fa-solid fa-trash"></i>
+                              </button>
+                            
+                            <div className="ml-2">
+                              {tag.label}
+                            </div>
+                          </div>
                         </div>
                     )
                 })}
@@ -141,22 +146,28 @@ export const TagList = () => {
           </div>
         </div> 
             </article>
-            <aside className="newTagForm"> 
-            <h3>Create a New Tag </h3>
-            <form>
-                <input
-                    type="text"
-                    required
-                    value={newTagName}
-                    ref={inputRef}
-                    onKeyDown={(event) => {handleEnter(event)}}
-                    onChange={(event) =>{
-                        setNewTagName(event.target.value)
-                    }}
-                />
-            </form>
-            <button onClick={handleSave}> Save </button>
-             </aside>
+            <aside className="newTagForm container"> 
+              <h3 className="title">Create a New Tag </h3>
+              <form>
+                <div className="field">
+                  <div className="control">
+                    <input
+                        type="text"
+                        className="input mb-4"
+                        required
+                        value={newTagName}
+                        ref={inputRef}
+                        onKeyDown={(event) => {handleEnter(event)}}
+                        onChange={(event) =>{
+                            setNewTagName(event.target.value)
+                        }}
+                    />
+                  </div>
+                </div>
+                  
+              </form>
+              <button onClick={handleSave} className="button is-primary mb-6"> Save </button>
+            </aside>
         </div>
     )
 }

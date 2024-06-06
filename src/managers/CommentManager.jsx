@@ -18,3 +18,13 @@ export const postComment = (commentObj) => {
         return Promise.reject(new Error("Network response was not ok"))
       })
 }
+
+export const updateComment = async (editedComment) => {
+    return await fetch(`http://localhost:8088/comments/${editedComment.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(editedComment)
+    })
+}

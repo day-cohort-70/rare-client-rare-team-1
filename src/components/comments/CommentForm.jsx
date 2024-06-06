@@ -29,7 +29,7 @@ export const CommentForm = ({token}) => {
 
 
     const handleComment = (e) => {
-        // e.preventDefault()
+        e.preventDefault()
 
         const newComment = {
             postId: parseInt(postId),

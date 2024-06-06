@@ -29,7 +29,7 @@ export const CommentForm = ({token}) => {
 
 
     const handleComment = (e) => {
-        // e.preventDefault()
+        e.preventDefault()
 
         const newComment = {
             postId: parseInt(postId),
@@ -39,7 +39,7 @@ export const CommentForm = ({token}) => {
         }
         /* eventually this will need to navigate to the new comments list page for the related post*/
         postComment(newComment).then(() => {
-            navigate(`/posts/${postId}/comment`)
+            navigate(`/posts/${postId}/comments`)
         })
     }
 

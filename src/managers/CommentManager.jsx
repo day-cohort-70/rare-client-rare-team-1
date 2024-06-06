@@ -19,6 +19,23 @@ export const postComment = (commentObj) => {
       })
 }
 
+
+export const deleteComment = async (id) => {
+    const deleteOptions = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    }
+    return await fetch(`http://localhost:8088/comments/${id}`, deleteOptions).then((res) => {
+        if (res.status === 204) {
+            return true;
+        } else {
+            throw new Error("Failed to delete comment");
+        }   
+    })
+}
+
 export const updateComment = async (editedComment) => {
     return await fetch(`http://localhost:8088/comments/${editedComment.id}`, {
         method: "PUT",
@@ -28,3 +45,4 @@ export const updateComment = async (editedComment) => {
         body: JSON.stringify(editedComment)
     })
 }
+

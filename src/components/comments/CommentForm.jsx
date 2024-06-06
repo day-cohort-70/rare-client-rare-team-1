@@ -46,7 +46,9 @@ export const CommentForm = ({token}) => {
 
     return (
         <div>
-
+            <div>
+                <button className="button" onClick={() => {navigate(`/posts/${postId}`)}}><i class="fa-solid fa-arrow-left"></i></button>
+            </div>
             <form key="form-comment" className="container-form-comment">
                 <div className="form-container">
                     <div className="form">
@@ -65,24 +67,6 @@ export const CommentForm = ({token}) => {
                     </div>
                 </div>
             </form>
-
-            <div className="container-post-comments">
-                {postComments
-                    .sort((a, b) => new Date(b.date) - new Date(a.date))
-                    .map(comment => {
-                        return (
-                            <div className="comment" key={comment.id}>
-                                <div>
-                                    <button className="button">EDIT</button>
-                                    <button className="button">DELETE</button>
-                                </div>
-                                <div>{comment?.content}</div>
-                                <div>{comment.author?.username}</div>
-                                <div>{comment?.date}</div>
-                            </div>
-                        )
-                })}
-            </div>
         </div>
     )
 }

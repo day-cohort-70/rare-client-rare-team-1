@@ -8,11 +8,12 @@ import { CategoryList } from "../components/category/CategoryList.jsx"
 import { AddCategoryForm } from "../components/category/AddCategoryForm.jsx"
 import { TagList } from "../components/tags/TagList.jsx"
 import { NewPost } from "../components/post/NewPost.jsx"
-import { CommentForm } from "../components/post/CommentForm.jsx"
 import { ManagePostTags } from "../components/tags/ManagePostTags.jsx"
 import { AllPosts } from "../components/allPosts/AllPosts.jsx"
 import { EditCategory } from "../components/category/EditCategoryForm.jsx"
 import { EditPost } from "../components/post/EditPost.jsx"
+import { CommentForm } from "../components/comments/CommentForm.jsx"
+import { CommentList } from "../components/comments/CommentList.jsx"
 
 
 export const ApplicationViews = ({ token, setToken }) => {
@@ -30,6 +31,7 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path=":postId" element={<PostDetails token={token}/>} />
           <Route path=":postId/edit" element={<EditPost />} />
           <Route path=":postId/comment" element={<CommentForm token={token}/>} />
+          <Route path=":postId/comments" element={<CommentList token={token}/>} />
           <Route path=":postId/tags" element={<ManagePostTags token={token}/>} />
         </Route>
 

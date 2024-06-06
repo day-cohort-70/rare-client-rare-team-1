@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getCommentsByPostId, postComment, deleteComment } from "../../managers/CommentManager.jsx"
-import { getCommentsByPostId, updateComment } from "../../managers/CommentManager.jsx"
+import { updateComment } from "../../managers/CommentManager.jsx"
 import { getOnlyPostByPostId } from "../../managers/PostManager.jsx"
 
 

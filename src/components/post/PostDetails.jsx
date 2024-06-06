@@ -4,8 +4,7 @@ import { getAllTags } from "../../managers/TagManager.jsx"
 import { getTagsByPostId } from "../../managers/PostTagManager.jsx"
 import { settings } from "../utils/Settings.jsx"
 import { deletePost, getPostByPostId } from "../../managers/PostManager.jsx"
-import "./postDetails.css"
-
+import 'bulma/css/bulma.css'
 
 
 export const PostDetails = () => {
@@ -52,38 +51,47 @@ export const PostDetails = () => {
 
 
     return (
-        <div className="container-post-details">
-            <div className="post-details">
-                <h3 className="title">{post.title}</h3>
-                <button className="button-delete" onClick={deletePostFromDatabase}>Delete Post</button>
-                <div className="container-image-and-tags">
-                    <div className="div-image">
-                        <img className="image" src={post.image_url} />
-                    </div>
-                    <div className="div-post-tags">
-                        <div className="post-tags">
-                            {postTags.map(tag => {
-                                return (
-                                    <div key={tag.id}>{tag.tag?.label}</div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                
-                
+        <div className="container mt-6">
+            <div className="box" style={{ position: 'relative' }}>
+                <div className="has-text-centered">
+                    <h3 className="title is-3">{post.title}</h3>
                 </div>
 
-                <div className="container-post-info">
-                    <div className="username">By {post.user?.username}</div>
-                    <button onClick={() => navigate(`/posts/${post.id}/comments`)} className="button">View Comments</button>
-                    <button onClick={() => navigate(`/posts/${post.id}/comment`)} className="button">Add Comment</button>
-                    <Link to={`/posts/${post.id}/tags`} postId={postId}>
-                        <button className="button">Manage Tags</button>
-                    </Link>
+                <button
+                    className="delete is-large"
+                    style={{ position: 'absolute', top: '20px', left: '20px' }}
+                    onClick={deletePostFromDatabase}
+                ></button>
+
+                <div className="is-flex is-justify-content-center mt-4">
+                    <div style={{ width: '60%' }}>
+                        <figure className="image is-3by1">
+                            <img src={post.image_url} alt="Post" />
+                        </figure>
+                        <div className="is-flex is-justify-content-space-around mt-4" style={{ width: '100%' }}>
+                            <p>By {post.user?.username}</p>
+                            <button className="button is-link" onClick={() => navigate(`/posts/${post.id}/comments`)}>View Comments</button>
+                            <button className="button is-link" onClick={() => navigate(`/posts/${post.id}/comment`)}>Add Comment</button>
+                            <Link to={`/posts/${post.id}/tags`} postId={post.id}>
+                                <button className="button is-link">Manage Tags</button>
+                            </Link>
+                        </div>
+                        <div className="mt-4">
+                            <p>{post.content}</p>
+                        </div>
+                    </div>
+
+                    <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', marginLeft: 'auto', marginRight: '20px' }}>
+                        {postTags.map(tag => (
+                            <span key={tag.id} className="tag is-info mt-1">{tag.tag?.label}</span>
+                        ))}
+                    </div>
                 </div>
-                <div className="content">{post.content}</div>
-                <div className="publication">{post.publication_date}</div>
+
+                <div className="has-text-right mt-4">
+                    <p>{post.publication_date}</p>
+                </div>
             </div>
         </div>
-    )
-}
+    );
+};

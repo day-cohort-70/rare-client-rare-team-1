@@ -75,7 +75,7 @@ export const PostDetails = () => {
 
                 <div className="container-post-info">
                     <div className="username">By {post.user?.username}</div>
-                    <button className="button">View Comments</button>
+                    <button onClick={() => navigate(`/posts/${post.id}/comments`)} className="button">View Comments</button>
                     <button onClick={() => navigate(`/posts/${post.id}/comment`)} className="button">Add Comment</button>
                     <Link to={`/posts/${post.id}/tags`} postId={postId}>
                         <button className="button">Manage Tags</button>

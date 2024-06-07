@@ -30,13 +30,13 @@ export const EditPost = () => {
     }
 
     return(
-        <form className="editPost">
-            <h2> Edit Post </h2>
-            <fieldset>
-                <div className="form-group">
+        <form className="editPost box m-4">
+            <h2 className="title"> Edit Post </h2>
+            <fieldset className="field">
+                <div className="control">
                     <input 
                     type="text"
-                    className="form-control"
+                    className="input"
                     placeholder={transientPost?.title}
                     onChange={(event) => {
                         const copy = {...transientPost}
@@ -45,11 +45,11 @@ export const EditPost = () => {
                     }} />
                 </div>
             </fieldset>
-            <fieldset>
-                <div className="form-group">
+            <fieldset className="field">
+                <div className="control">
                     <input 
                     type="text"
-                    className="form-control"
+                    className="input"
                     placeholder={transientPost?.image_url}
                     onChange={(event) =>{
                         const copy = {...transientPost}
@@ -58,11 +58,11 @@ export const EditPost = () => {
                     }} />
                 </div>
             </fieldset>
-            <fieldset>
-                <div className="form-group">
+            <fieldset className="field">
+                <div className="control">
                     <textarea 
                     type="text"
-                    className="form-control"
+                    className="textarea"
                     placeholder={transientPost?.content}
                     rows="10"
                     onChange={(event) => {
@@ -72,33 +72,35 @@ export const EditPost = () => {
                     }} />
                 </div>
             </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <select id="category" 
-                    onChange = {(event)=>{
-                        const copy = {...transientPost}
-                        copy.category_id = parseInt(event.target.value)
-                        setTransientPost(copy)
-                        }}>
-                    {categories.find(cat => cat.id === transientPost.category_id)? (
-                    <option value="" disabled selected> 
-                            {categories.find(cat => cat.id === transientPost.category_id).label}
-                     </option>
-                    ): null}
-                    {categories.map((category) =>{
-                        return(
-                            <option value={category.id} key={category.id}>
-                                {category.label}
-                            </option> 
-                        )
-                    })}
-                    </select>
+            <fieldset className="field">
+                <div className="control">
+                    <div className="select">
+                        <select id="category" 
+                        onChange = {(event)=>{
+                            const copy = {...transientPost}
+                            copy.category_id = parseInt(event.target.value)
+                            setTransientPost(copy)
+                            }}>
+                        {categories.find(cat => cat.id === transientPost.category_id)? (
+                        <option value="" disabled selected> 
+                                {categories.find(cat => cat.id === transientPost.category_id).label}
+                        </option>
+                        ): null}
+                        {categories.map((category) =>{
+                            return(
+                                <option value={category.id} key={category.id}>
+                                    {category.label}
+                                </option> 
+                            )
+                        })}
+                        </select>
+                    </div>
                 </div>
             </fieldset>
-            <button className="save-btn"
+            <button className="button is-primary mr-2"
             onClick = {handleSave}
             > Save Post </button>
-            <button
+            <button className="button is-primary"
             onClick={()=>{navigate(`/posts`)}}
             > Cancel </button>
         </form>

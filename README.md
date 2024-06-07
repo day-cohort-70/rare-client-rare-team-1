@@ -67,7 +67,7 @@ This platform was created for Rare Publishing Company to replace their process o
 
 * [![React][React.js]][React-url]
 * [![Bulma][Bulma.com]][Bulma-url]
-* [![JQuery][JQuery.com]][Python-url]
+* [![JSON][JSON.com]][JSON-url]
 * [![Python][Python.com]][Python-url]
 * [![SQLite][SQLite.com]][SQLite-url]
 

@@ -19,6 +19,7 @@ export const postComment = (commentObj) => {
       })
 }
 
+
 export const deleteComment = async (id) => {
     const deleteOptions = {
         method: "DELETE",
@@ -34,3 +35,14 @@ export const deleteComment = async (id) => {
         }   
     })
 }
+
+export const updateComment = async (editedComment) => {
+    return await fetch(`http://localhost:8088/comments/${editedComment.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(editedComment)
+    })
+}
+

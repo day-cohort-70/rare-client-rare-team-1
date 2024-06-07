@@ -102,53 +102,53 @@ This application supports both admin and general user profiles.  Admins have the
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Unauthenticated users can...
+- [ ] *Unauthenticated users can...*
 
-Register for an account
-Login to the system
+1. Register for an account
+2. Login to the system
 
-- [ ] Authors can...
+- [ ] *Authors can...*
 
-Login to the system
-Logout of the system
-View any active and published Posts
-View any Posts they have created
-Comment on a Post
-Edit Comments they created
-Delete Comments they created
-Add a Reaction to a Post
-Remove a Reaction from a Post
-Subscribe to a different User's Posts
-Unsubscribe from a user's Posts
-Write a new Post
-Publish a Post they have created
-Unpublish a Post they have created
-Edit a Post they have created
-Delete a Post they have created
-Add Tags to a Post they have created
-Remove Tags from a Post they have created
-Upload a Profile image
-Upload a Post Header image
+1. Login to the system
+2 Logout of the system
+3. View any active and published Posts
+4. View any Posts they have created
+5. Comment on a Post
+6. Edit Comments they created
+7. Delete Comments they created
+8. Add a Reaction to a Post
+9. Remove a Reaction from a Post
+10. Subscribe to a different User's Posts
+11. Unsubscribe from a user's Posts
+12. Write a new Post
+13. Publish a Post they have created
+14. Unpublish a Post they have created
+15. Edit a Post they have created
+16. Delete a Post they have created
+17. Add Tags to a Post they have created
+18. Remove Tags from a Post they have created
+19. Upload a Profile image
+20. Upload a Post Header image
 
 
-- [ ] Admins can...
+- [ ] *Admins can...*
 
-Do all the things Author users can do
-View any User Profile
-Deactivate a User Profile
-Change a User Profile's user type
-Add a Category
-Edit a Category
-Remove a Category
-Add a Tag
-Edit a Tag
-Remove a Tag
-Add a Reaction to the system
-Edit a Reaction in the system
-Remove a Reaction from the system
-Upload a Reaction image
-Delete any Post
-Delete any Comment
+1. Do all the things Author users can do
+2. View any User Profile
+3. Deactivate a User Profile
+4. Change a User Profile's user type
+5. Add a Category
+6. Edit a Category
+7. Remove a Category
+8. Add a Tag
+9. Edit a Tag
+10. Remove a Tag
+11. Add a Reaction to the system
+12. Edit a Reaction in the system
+13. Remove a Reaction from the system
+14. Upload a Reaction image
+15. Delete any Post
+16. Delete any Comment
 
 See the [open issues](https://github.com/day-cohort-70/rare-client-rare-team-1/issues) for a full list of proposed features (and known issues).
 

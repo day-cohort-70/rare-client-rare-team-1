@@ -57,12 +57,17 @@ export const PostDetails = () => {
                     <h3 className="title is-3">{post.title}</h3>
                 </div>
 
+                <div style={{ position: 'absolute', top: '20px', left: '20px', display: 'flex', gap: '10px' }}>
                 <button
-                    className="delete is-large"
-                    style={{ position: 'absolute', top: '20px', left: '20px' }}
+                    className="button"
                     onClick={deletePostFromDatabase}
-                ></button>
-
+                ><i className="fa-solid fa-trash"></i></button>
+                <button 
+                    className="button" 
+                    onClick={() => navigate(`/posts/${post.id}/edit`)}
+                ><i className="fa-solid fa-gear"></i></button>
+                </div>
+                    
                 <div className="is-flex is-justify-content-center mt-4">
                     <div style={{ width: '60%' }}>
                         <figure className="image is-3by1">

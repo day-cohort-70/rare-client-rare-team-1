@@ -11,7 +11,6 @@
 <h3 align="center">Rare Publishing Platform</h3>
 
   <p align="center">
-    Project_Description
     <br />
     <a href="https://github.com/day-cohort-70/rare-client-rare-team-1"><strong>Explore the docs »</strong></a>
     <br />
@@ -44,9 +43,9 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+    <!-- <li><a href="#license">License</a></li> -->
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <!-- <li><a href="#acknowledgments">Acknowledgments</a></li> -->
   </ol>
 </details>
 
@@ -102,12 +101,12 @@ This application supports both admin and general user profiles.  Admins have the
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] *Unauthenticated users can...*
+- [ ] **Unauthenticated users can...**
 
 1. Register for an account
 2. Login to the system
 
-- [ ] *Authors can...*
+- [ ] **Authors can...**
 
 1. Login to the system
 2 Logout of the system
@@ -131,7 +130,7 @@ This application supports both admin and general user profiles.  Admins have the
 20. Upload a Post Header image
 
 
-- [ ] *Admins can...*
+- [ ] **Admins can...**
 
 1. Do all the things Author users can do
 2. View any User Profile

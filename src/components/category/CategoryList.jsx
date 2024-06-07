@@ -93,7 +93,9 @@ export const CategoryList = () => {
                                 <i className="fa-solid fa-trash"></i>
                             </button>
 
-                            {categoryObj.label}
+                            <div className="ml-2">
+                                    {categoryObj.label}
+                            </div>
                         </div>
                     )
                 })}

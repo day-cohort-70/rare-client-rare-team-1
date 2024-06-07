@@ -14,7 +14,7 @@ export const NewPost = ({token}) => {
         publication_date: new Date(),
         image_url: "",
         content: "",
-        approved: 1
+        approved: 0
         })
     const [categories, setCategories] = useState([])
     const [tags, setTags] = useState([])
@@ -61,13 +61,13 @@ export const NewPost = ({token}) => {
 
 
     return (
-        <form className="newPost">
-            <h2> New Post </h2>
-            <fieldset>
-                <div className="form-group">
+        <form className="newPost box m-4">
+            <h2 className="title"> New Post </h2>
+            <fieldset className="field">
+                <div className="control">
                     <input 
                     type="text"
-                    className="form-control"
+                    className="input"
                     placeholder="Title"
                     onChange={(event) => {
                         const copy = {...post}
@@ -76,11 +76,11 @@ export const NewPost = ({token}) => {
                     }} />
                 </div>
             </fieldset>
-            <fieldset>
-                <div className="form-group">
+            <fieldset className="field">
+                <div className="control">
                     <input 
                     type="text"
-                    className="form-control"
+                    className="input"
                     placeholder="Image URL"
                     onChange={(event) =>{
                         const copy = {...post}
@@ -89,11 +89,11 @@ export const NewPost = ({token}) => {
                     }} />
                 </div>
             </fieldset>
-            <fieldset>
-                <div className="form-group">
+            <fieldset className="field">
+                <div className="control">
                     <textarea 
                     type="text"
-                    className="form-control"
+                    className="textarea"
                     placeholder="Article Content"
                     rows="10"
                     onChange={(event) => {
@@ -103,8 +103,8 @@ export const NewPost = ({token}) => {
                     }} />
                 </div>
             </fieldset>
-            <fieldset>
-                <div className="form-group">
+            <fieldset className="field">
+                <div className="control">
                     <select id="category" 
                     onChange = {(event)=>{
                         const copy = {...post}
@@ -122,8 +122,8 @@ export const NewPost = ({token}) => {
                     </select>
                 </div>
             </fieldset>
-            <fieldset>
-                <div className="form-group">
+            <fieldset className="field">
+                <div className="control">
                     {tags.map(tag => (
                     <div key={tag.id}>
                     <input
@@ -142,7 +142,7 @@ export const NewPost = ({token}) => {
                     ))}
                     </div>
             </fieldset>
-            <button className="save-btn" onClick={handleSubmit}> Post </button>
+            <button className="button is-primary mr-2" onClick={handleSubmit}> Post </button>
         </form>
     )
 }

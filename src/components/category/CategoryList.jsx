@@ -66,14 +66,17 @@ export const CategoryList = () => {
                     const colorClass = colorClasses[index % colorClasses.length];
                     return (
                         <div key={categoryObj.id} className={`notification ${colorClass} category-item`}>
-                            <button className="button white m-1" onClick={() => handleEdit(categoryObj.id)}>
-                                <i className="fa-solid fa-gear"></i>
-                            </button>
-                            <button className="button white m-1" onClick={() => handleDelete(categoryObj.id)}>
-                                <i className="fa-solid fa-trash"></i>
-                            </button>
-
-                            {categoryObj.label}
+                            <div className="is-flex is-align-items-center">
+                                <button className="button white m-1" onClick={() => handleEdit(categoryObj.id)}>
+                                    <i className="fa-solid fa-gear"></i>
+                                </button>
+                                <button className="button white m-1 " onClick={() => handleDelete(categoryObj.id)}>
+                                    <i className="fa-solid fa-trash"></i>
+                                </button>
+                                <div className="ml-2">
+                                    {categoryObj.label}
+                                </div>
+                            </div>
                         </div>
                     )
                 })}

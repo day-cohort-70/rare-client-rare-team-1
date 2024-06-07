@@ -21,7 +21,7 @@ export const UserPosts = ({ token }) => {
 
     return (
         <section className="container-admin-posts-page">
-          <h2 className="title m-4">My Posts</h2>
+          <h2 className="title m-4 is-primary">My Posts</h2>
           <section className="container-admin-posts">
             {adminPosts.length === 0 ? (
               <p>you currently have zero posts</p>

@@ -15,12 +15,17 @@ export const UserPosts = ({ token }) => {
         })
       }
   
+    const handleNewPost = () => {
+      navigate(`/newPost`)
+    }
+    
     useEffect(() => {
       getAndSetAdminPosts()
     }, [token])
 
     return (
         <section className="container-admin-posts-page">
+          <button className="button is-warning m-4" onClick={handleNewPost}>New Post</button>
           <h2 className="title m-4 is-primary">My Posts</h2>
           <section className="container-admin-posts">
             {adminPosts.length === 0 ? (
